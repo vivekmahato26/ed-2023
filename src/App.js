@@ -1,4 +1,4 @@
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import { Outlet, RouterProvider, createBrowserRouter } from "react-router-dom";
 import Login from "./components/login";
 import Register from "./components/register";
 import Home from "./components/home";
@@ -10,51 +10,74 @@ import CourseDetails from "./components/courseDetails";
 import UserDetails from "./components/userDetails";
 import AdminDash from "./components/adminDash";
 
-
-import 'bootstrap/dist/css/bootstrap.min.css';
+import "bootstrap/dist/css/bootstrap.min.css";
+import AddCourse from "./components/addCourse";
+import EditCourse from "./components/editCourse";
+import AddTopics from "./components/addTopics";
+import UpdateCourse from "./components/updateCourse";
 
 function App() {
   const router = createBrowserRouter([
     {
       path: "/login",
-      element: <Login/>
+      element: <Login />,
     },
     {
       path: "/register",
-      element: <Register/>
+      element: <Register />,
     },
     {
       path: "/",
-      element: <Home/>
+      element: <Home />,
     },
     {
       path: "/verify",
-      element: <VerifyToken/>
+      element: <VerifyToken />,
     },
     {
       path: "/generateToken",
-      element: <GenerateToken/>
+      element: <GenerateToken />,
     },
     {
       path: "/payment",
-      element: <Payment/>
+      element: <Payment />,
     },
     {
       path: "/:courseId",
-      element: <CourseDetails/>
+      element: <CourseDetails />,
     },
     {
       path: "/editCourse",
-      element: <AdminDash/>
+      element: <AdminDash />,
+      children: [
+        {
+          path: "add",
+          element: <AddCourse/>,
+        },
+        {
+          path: "update/:courseId",
+          element: <EditCourse/>,
+          children: [
+            {
+              path: "topics",
+              element: <AddTopics/>,
+            },
+            {
+              path: "update",
+              element: <UpdateCourse/>,
+            },
+          ],
+        },
+      ],
     },
     {
       path: "/userDetails",
-      element: <UserDetails/>
+      element: <UserDetails />,
     },
-  ])
+  ]);
   return (
     <div className="App">
-     <RouterProvider router={router}/>
+      <RouterProvider router={router} />
     </div>
   );
 }

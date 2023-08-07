@@ -74,7 +74,7 @@ export default function UserDetails() {
             </Row>
             <Accordion open={open} toggle={toggle}>
               <AccordionItem>
-                <AccordionHeader targetId="1">Accordion Item 1</AccordionHeader>
+                <AccordionHeader targetId="1">Address</AccordionHeader>
                 <AccordionBody accordionId="1">
                   <div
                     style={{
@@ -115,7 +115,7 @@ export default function UserDetails() {
         )}
       </Row>
       <Modal isOpen={modal} toggle={toggle} >
-        <ModalHeader toggle={toggle}>Add Address</ModalHeader>
+        <ModalHeader toggle={toggleModal}>Add Address</ModalHeader>
         <ModalBody>
           <Row>
             <Col md={{
