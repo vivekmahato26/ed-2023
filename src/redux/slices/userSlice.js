@@ -7,7 +7,10 @@ const userSlice = createSlice({
         value: {
             register: {},
             login: {},
-            generateToken: {}
+            generateToken: {},
+            verifyToken: {},
+            changePass:{},
+            userDetails:{}
         }
     },
     reducers: {},
@@ -26,6 +29,30 @@ const userSlice = createSlice({
         })
         builder.addCase(generateToken.rejected, (state,action) => {
             state.value.generateToken = null;
+            state.error = action.error;
+        })
+        builder.addCase(verifyToken.fulfilled, (state,action) => {
+            state.value.verifyToken = action.payload;
+            state.error = null
+        })
+        builder.addCase(verifyToken.rejected, (state,action) => {
+            state.value.verifyToken = null;
+            state.error = action.error;
+        })
+        builder.addCase(changePassword.fulfilled, (state,action) => {
+            state.value.changePass = action.payload;
+            state.error = null
+        })
+        builder.addCase(changePassword.rejected, (state,action) => {
+            state.value.changePass = null;
+            state.error = action.error;
+        })
+        builder.addCase(fetchUser.fulfilled, (state,action) => {
+            state.value.userDetails = action.payload;
+            state.error = null
+        })
+        builder.addCase(fetchUser.rejected, (state,action) => {
+            state.value.userDetails = null;
             state.error = action.error;
         })
         builder.addCase(login.fulfilled, (state,action) => {
@@ -57,6 +84,23 @@ export const login = createAsyncThunk("/login",async({userDetails,navigate}) => 
 })
 export const generateToken = createAsyncThunk("/passwordReset",async(userDetails) => {
     const {data} = await axios.post(baseUrl+"/users/passwordReset", userDetails);
+    return data;
+})
+export const verifyToken = createAsyncThunk("/verifyToken",async(token) => {
+    const {data} = await axios.get(baseUrl+"/users/verify"+ token);
+    return data;
+})
+export const changePassword = createAsyncThunk("/changePassword",async(passData) => {
+    const {data} = await axios.post(baseUrl+"/users/changePass", passData);
+    return data;
+})
+export const fetchUser = createAsyncThunk("/fetchUser",async() => {
+    const token = localStorage.getItem("token");
+    const {data} = await axios.get(baseUrl+"/users/loggedInUser", {
+        headers: {
+            Authorization: "Bearer "+ token
+        }
+    });
     return data;
 })
 

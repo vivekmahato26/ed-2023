@@ -1,10 +1,11 @@
 import {useState} from 'react'
 import { Col, Row, Form, FormGroup, Input, Label, Button } from "reactstrap";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { generateToken } from '../redux/slices/userSlice';
 
 export default function GenerateToken() {
+  const link = useSelector(state => state.User.value.generateToken)
   const [userDetails, setUserDetails] = useState({});
   const dispatch = useDispatch();
   const handleSubmit = (e) => {
@@ -12,7 +13,7 @@ export default function GenerateToken() {
   };
   return (
     <Row>
-    <Col
+    {!link.token ? <Col
       md={{
         offset: 3,
         size: 6,
@@ -45,7 +46,7 @@ export default function GenerateToken() {
           <Link to={"/register"}>Dont have an account?</Link>
         </Col>
       </Row>
-    </Col>
+    </Col> : <p>Reset Link Generated Please check email {userDetails.email}</p>}
   </Row>
   )
 }

@@ -32,10 +32,6 @@ function App() {
       element: <VerifyToken/>
     },
     {
-      path: "/resetPassword",
-      element: <ResetPass/>
-    },
-    {
       path: "/generateToken",
       element: <GenerateToken/>
     },
