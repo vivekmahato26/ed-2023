@@ -23,9 +23,9 @@ export default function AdminDash() {
             </Link>
         </Row>
         <Row>
-            <Link to={"/editCourse/update/112455"} style={{textDecoration:"none"}}>
+            <Link to={"/editCourse/edit"} style={{textDecoration:"none"}}>
               <Button color="danger" block >
-                Add Course
+                Edit Course
               </Button>
             </Link>
         </Row>

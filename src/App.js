@@ -55,7 +55,7 @@ function App() {
           element: <AddCourse/>,
         },
         {
-          path: "update/:courseId",
+          path: "edit/",
           element: <EditCourse/>,
           children: [
             {
