@@ -15,6 +15,7 @@ import AddCourse from "./components/addCourse";
 import EditCourse from "./components/editCourse";
 import AddTopics from "./components/addTopics";
 import UpdateCourse from "./components/updateCourse";
+import ViewDetails from "./components/viewCourse";
 
 function App() {
   const router = createBrowserRouter([
@@ -74,6 +75,10 @@ function App() {
       path: "/userDetails",
       element: <UserDetails />,
     },
+    {
+      path:"/view/:courseId",
+      element: <ViewDetails/>
+    }
   ]);
   return (
     <div className="App">
