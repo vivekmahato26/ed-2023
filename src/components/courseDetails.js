@@ -32,9 +32,13 @@ export default function CourseDetails() {
   };
   const handlePayment = async() => {
     try {
-        const {data} = await axios.post(baseUrl+"/payment/checkout",courseData);
+        const {data} = await axios.post(baseUrl+"/payment/checkout",courseData,{
+          headers: {
+            Authorization: "Bearer "+ localStorage.getItem("token")
+          }
+        });
+        localStorage.setItem("cs_id", data.id);
         window.location.assign(data.url);
-        console.log(data);
     } catch (error) {
       console.log(error);
     }
